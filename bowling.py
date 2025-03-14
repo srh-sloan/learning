@@ -15,8 +15,18 @@ def get_strike_score(frames, current_frame_index):
     for roll in next_frame:
         if roll.isdigit():
             next_frame_score += int(roll)
-        elif roll == "/" or roll == "X":
+        elif roll == "/":
             next_frame_score = 10
+        elif roll == "X":
+            # TODO this is messy
+            next_frame_score = 10
+            next_next_frame = frames[current_frame_index+2]
+            roll2 = next_next_frame[0]
+            if roll2.isdigit():
+                next_frame_score += int(roll2)
+            elif roll2 == "/" or roll == "X":
+                next_frame_score += 10
+
     return 10 + next_frame_score
 
 # TODO spare or strike on last turn
